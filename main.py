@@ -10,10 +10,23 @@ from middleware.errorHandler import ErrorHandler
 from routes.games_router import games_router
 import uvicorn
 import decouple
+from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
 app.title = 'Florez app'
 app.version = '1.0.0'
+
+origin = [
+    decouple.config('URL1')
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origin,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 app.add_middleware(ErrorHandler)
 app.include_router(games_router)
