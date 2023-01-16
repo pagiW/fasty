@@ -1,9 +1,0 @@
-services:
-  api-app:
-    build:
-      context: .
-      dockerfile: ./Dockerfile
-    volumes:
-      - .:/server
-    ports:
-      - '80:80'
