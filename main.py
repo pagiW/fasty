@@ -8,6 +8,8 @@ from models.models import Games
 from fastapi.encoders import jsonable_encoder
 from middleware.errorHandler import ErrorHandler
 from routes.games_router import games_router
+import uvicorn
+import decouple
 
 app = FastAPI()
 app.title = 'Florez app'
@@ -27,3 +29,6 @@ def login(user: User):
     if user.email == 'Juan@gmail.com' and user.password == 'A xd':
         return create_token(dict(user))
     return JSONResponse(content=dict(user), status_code=201)
+
+if __name__ == '__main__':
+    uvicorn.run(app, host='0.0.0.0', port=decouple.config('PORT'))
